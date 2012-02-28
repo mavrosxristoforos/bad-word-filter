@@ -5,7 +5,7 @@
  * @license     GNU/GPL, see LICENSE.php
  */
 
- 
+
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
@@ -38,22 +38,22 @@ class plgContentBadWordFilter extends JPlugin {
     //global $mainframe;
 
     // Plugin helper no longer need in 1.6, parameter object now available automatically (in 1.6)
-    $allow_exceptions = $this->params->get('allow_exceptions', 1);
-
+    $allow_exceptions = $this->params->get('allow_exceptions', '1');
 
     if ($allow_exceptions == '1') {
       if (JString::strpos($text, '{no_badwordfilter}') !== false) {
+        $text = str_replace('{no_badwordfilter}', '', $text);
         return true;
       }
     }
 
-    $badwords = $this->params->def('bad_words', 'porn, sex');
+    $badwords = $this->params->def('bad_words', 'porn,sex');
     $html_out = $this->params->def('html_out', '<s>BAD WORD</s>');
 
 
     $badwords_array = explode(',', $badwords);
 
-    
+
     foreach($badwords_array as $badword) {
       $text = JString::str_ireplace($badword, $html_out, $text);
     }

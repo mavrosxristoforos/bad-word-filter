@@ -16,9 +16,9 @@
     <config><fields name="params"><fieldset name="basic">
         <field name="bad_words"
         type="textarea" cols="30" rows="4"
-        default="porn, sex"
+        default="porn,sex"
         label="Bad Words"
-        description="Words to filter out, separated by commas. Example: porn, sex" />
+        description="Words to filter out, separated by commas. Example: porn,sex" />
         <field name="html_out"
         type="textarea" cols="30" rows="10"
         filter="raw"
