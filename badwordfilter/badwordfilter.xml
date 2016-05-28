@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <extension version="1.6.0" client="site" type="plugin" group="content" method="upgrade">
     <name>Content - Bad Word Filter</name>
     <author>Christopher Mavros</author>
@@ -8,7 +7,7 @@
     <license>GNU General Public License</license>
     <authorEmail>mavrosxristoforos@gmail.com</authorEmail>
     <authorUrl>http://www.mavrosxristoforos.com/</authorUrl>
-    <version>1.0.0</version>
+<version>1.0.4</version>
     <description>A simple word filter plugin. Produces a user-defined HTML if it finds a bad word</description>
     <files>
         <filename plugin="badwordfilter">badwordfilter.php</filename>
