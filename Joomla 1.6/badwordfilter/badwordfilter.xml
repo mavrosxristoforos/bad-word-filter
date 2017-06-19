@@ -7,11 +7,14 @@
     <license>GNU General Public License</license>
     <authorEmail>mavrosxristoforos@gmail.com</authorEmail>
     <authorUrl>http://www.mavrosxristoforos.com/</authorUrl>
-<version>1.0.5</version>
+<version>1.0.7</version>
     <description>A simple word filter plugin. Produces a user-defined HTML if it finds a bad word</description>
     <files>
         <filename plugin="badwordfilter">badwordfilter.php</filename>
     </files>
+    <updateservers>
+      <server type="extension" priority="1" name="BadWordFilter Updates">http://mavrosxristoforos.com/index.php?option=com_extensionupdater&amp;extension=badwordfilter</server>
+    </updateservers>
     <config><fields name="params"><fieldset name="basic">
         <field name="bad_words"
         type="textarea" cols="30" rows="4"
