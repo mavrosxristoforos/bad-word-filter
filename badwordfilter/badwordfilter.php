@@ -29,7 +29,7 @@ class plgContentBadWordFilter extends JPlugin {
     $allow_exceptions = $this->params->get('allow_exceptions', '1');
 
     if ($allow_exceptions == '1') {
-      if (JString::strpos($text, '{no_badwordfilter}') !== false) {
+      if (strpos($text, '{no_badwordfilter}') !== false) {
         $text = str_replace('{no_badwordfilter}', '', $text);
         return true;
       }
@@ -43,7 +43,7 @@ class plgContentBadWordFilter extends JPlugin {
 
 
     foreach($badwords_array as $badword) {
-      $text = JString::str_ireplace($badword, $html_out, $text);
+      $text = str_ireplace($badword, $html_out, $text);
     }
 
     return true;
