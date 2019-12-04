@@ -7,7 +7,7 @@
     <license>GNU General Public License</license>
     <authorEmail>mavrosxristoforos@gmail.com</authorEmail>
     <authorUrl>http://www.mavrosxristoforos.com/</authorUrl>
-<version>1.1.9</version>
+<version>1.1.10</version>
     <description>A simple word filter plugin. Produces a user-defined HTML if it finds a bad word</description>
     <files>
         <filename plugin="badwordfilter">badwordfilter.php</filename>

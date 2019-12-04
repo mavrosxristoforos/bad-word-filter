@@ -1,4 +1,3 @@
 INCVERSION:badwordfilter/badwordfilter.xml
-DELETE:badwordfilter16.zip
+DELETE:badwordfilter.zip
 ZIPDIR:badwordfilter
-RENAME:badwordfilter.zip badwordfilter16.zip
