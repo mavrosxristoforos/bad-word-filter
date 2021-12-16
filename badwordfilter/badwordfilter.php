@@ -16,15 +16,14 @@ jimport( 'joomla.plugin.plugin' );
 
 class plgContentBadWordFilter extends JPlugin {
 
-  public function onContentPrepare($context, &$row, &$params, $page = 0) {
-    if (is_object($row)) {
-        $text = &$row->text;
+  private function filter_content($badwords_array, $html_out, $text) {
+    foreach($badwords_array as $badword) {
+      $text = str_ireplace(trim($badword), $html_out, $text);
     }
-    else {
-      $text = &$row;
-    }
-    //global $mainframe;
+    return $text;
+  }
 
+  public function onContentPrepare($context, &$row, &$params, $page = 0) {
     // Plugin helper no longer need in 1.6, parameter object now available automatically (in 1.6)
     $allow_exceptions = $this->params->get('allow_exceptions', '1');
 
@@ -35,15 +34,20 @@ class plgContentBadWordFilter extends JPlugin {
       }
     }
 
-    $badwords = $this->params->def('bad_words', 'porn,sex');
-    $html_out = $this->params->def('html_out', '<s>BAD WORD</s>');
-
-
+    $badwords = $this->params->get('bad_words', 'porn,sex');
+    $html_out = $this->params->get('html_out', '<s>BAD WORD</s>');
     $badwords_array = explode(',', $badwords);
-
-
-    foreach($badwords_array as $badword) {
-      $text = str_ireplace($badword, $html_out, $text);
+    
+    if (is_object($row)) {
+      if (isset($row->text)) {
+        $row->text = $this->filter_content($badwords_array, $html_out, $row->text);
+      }
+      if (($this->params->get('filter_titles', '1')) && (isset($row->title))) {
+        $row->title = $this->filter_content($badwords_array, strip_tags($html_out), $row->title);
+      }
+    }
+    else {
+      $row = $this->filter_content($badwords_array, $html_out, $row);
     }
 
     return true;
