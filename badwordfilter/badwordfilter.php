@@ -10,27 +10,36 @@
 -------------------------------------------------------------------------*/
 
 // no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' );
+\defined( '_JEXEC' ) or die( 'Restricted access' );
 
-jimport( 'joomla.plugin.plugin' );
+use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Factory;
 
-class plgContentBadWordFilter extends JPlugin {
+class plgSystemBadWordFilter extends CMSPlugin {
 
   private function filter_content($badwords_array, $html_out, $text) {
     foreach($badwords_array as $badword) {
-      $text = str_ireplace(trim($badword), $html_out, $text);
+      if (!empty($badword)) {
+        $text = str_ireplace(trim($badword), $html_out, $text);
+      }
     }
     return $text;
   }
 
-  public function onContentPrepare($context, &$row, &$params, $page = 0) {
-    // Plugin helper no longer need in 1.6, parameter object now available automatically (in 1.6)
+  public function onAfterRender() {
+    $app = Factory::getApplication();
+    if ($app->isClient('administrator')) {
+      return;
+    }
+    $text = $app->getBody();
+
     $allow_exceptions = $this->params->get('allow_exceptions', '1');
 
     if ($allow_exceptions == '1') {
-      if (strpos($text, '{no_badwordfilter}') !== false) {
-        $text = str_replace('{no_badwordfilter}', '', $text);
-        return true;
+      if (stripos($text, '{no_badwordfilter}') !== false) {
+        $text = str_ireplace('{no_badwordfilter}', '', $text);
+        $app->setBody($text);
+        return;
       }
     }
 
@@ -38,19 +47,11 @@ class plgContentBadWordFilter extends JPlugin {
     $html_out = $this->params->get('html_out', '<s>BAD WORD</s>');
     $badwords_array = explode(',', $badwords);
     
-    if (is_object($row)) {
-      if (isset($row->text)) {
-        $row->text = $this->filter_content($badwords_array, $html_out, $row->text);
-      }
-      if (($this->params->get('filter_titles', '1')) && (isset($row->title))) {
-        $row->title = $this->filter_content($badwords_array, strip_tags($html_out), $row->title);
-      }
-    }
-    else {
-      $row = $this->filter_content($badwords_array, $html_out, $row);
+    $filtered_text = $this->filter_content($badwords_array, $html_out, $text);
+    if ($filtered_text != $text) {
+      $app->setBody($filtered_text);
     }
 
-    return true;
   }
 
 }
