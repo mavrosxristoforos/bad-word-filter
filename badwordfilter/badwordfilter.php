@@ -12,8 +12,8 @@
 // no direct access
 \defined( '_JEXEC' ) or die( 'Restricted access' );
 
-use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\CMS\Factory;
+use \Joomla\CMS\Plugin\CMSPlugin;
+use \Joomla\CMS\Factory;
 
 class plgSystemBadWordFilter extends CMSPlugin {
 
