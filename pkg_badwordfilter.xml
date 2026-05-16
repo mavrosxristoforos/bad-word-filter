@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="package" version="3.0" method="upgrade">
+  <packagename>pkg_badwordfilter</packagename>
+  <name>Bad Word Filter</name>
+  <creationDate>May 2017</creationDate>
+  <author>Christopher Mavros</author>
+  <authorEmail>mavrosxristoforos@gmail.com</authorEmail>
+  <authorUrl>https://mavxr.com</authorUrl>
+  <copyright>All Rights Reserved (C) Mavxr.com</copyright>
+  <license>GPLv3</license>
+<version>3.0.40</version>
+  <description>Bad Word Filter - On your website, you speak last.</description>
+  <files>
+    <file type="component" id="com_badwordfilter">com_badwordfilter.zip</file>
+    <file type="plugin" id="badwordfilter">badwordfilter.zip</file>
+  </files>
+  <updateservers>
+    <server type="extension" priority="1" name="BadWordFilter Updates">https://mavxr.com/index.php?option=com_extensionupdater&amp;extension=badwordfilter</server>
+  </updateservers>
+  <params/>
+  <config/>
+</extension>

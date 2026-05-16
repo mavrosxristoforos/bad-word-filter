@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="4.0" method="upgrade">
+    <name>com_badwordfilter</name>
+    <creationDate>2026-05-16</creationDate>
+    <copyright>2026 Christopher Mavros</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Christopher Mavros</author>
+    <authorEmail>me@mavxr.com</authorEmail>
+    <authorUrl>https://mavxr.com</authorUrl>
+<version>3.0.40</version>
+    <description>Bad Word Filter - On your website, you speak last.</description>
+    <namespace path="src">Badwordfilter\Component\Badwordfilter</namespace>
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update> <!-- Runs on update -->
+        <schemas>
+            <schemapath type="mysql">sql/updates</schemapath>
+        </schemas>
+    </update>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <media destination="com_badwordfilter" folder="media">
+        <folder>css</folder>
+        <folder>js</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
+    <administration>
+        <menu>COM_BADWORDFILTER</menu>
+        <submenu>
+			<menu link="option=com_badwordfilter&amp;view=replacements" view="replacements" alt="Badwordfilter/Replacements">COM_BADWORDFILTER_TITLE_REPLACEMENTS</menu>
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>services</folder>
+            <folder>presets</folder>
+            <folder>sql</folder>
+        </files>
+        <languages folder="administrator/languages">
+			<language tag="en-GB">en-GB/com_badwordfilter.ini</language>
+			<language tag="en-GB">en-GB/com_badwordfilter.sys.ini</language>
+        </languages>
+    </administration>
+    <config>
+    </config>
+</extension>

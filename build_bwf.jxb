@@ -1,3 +1,9 @@
 INCVERSION:badwordfilter/badwordfilter.xml
+INCVERSION:com_badwordfilter/badwordfilter.xml
+INCVERSION:pkg_badwordfilter.xml
 DELETE:badwordfilter.zip
+DELETE:com_badwordfilter.zip
+DELETE:pkg_badwordfilter.zip
 ZIPDIR:badwordfilter
+ZIPDIR:com_badwordfilter
+ZIPFILES:pkg_badwordfilter.zip pkg_badwordfilter.xml com_badwordfilter.zip badwordfilter.zip

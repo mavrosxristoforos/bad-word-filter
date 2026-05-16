@@ -35,7 +35,7 @@ class plgSystemBadWordFilter extends CMSPlugin {
 
     $allow_exceptions = $this->params->get('allow_exceptions', '1');
 
-    if ($allow_exceptions == '1') {
+    if ($allow_exceptions) {
       if (stripos($text, '{no_badwordfilter}') !== false) {
         $text = str_ireplace('{no_badwordfilter}', '', $text);
         $app->setBody($text);
@@ -46,8 +46,22 @@ class plgSystemBadWordFilter extends CMSPlugin {
     $badwords = $this->params->get('bad_words', 'porn,sex');
     $html_out = $this->params->get('html_out', '<s>BAD WORD</s>');
     $badwords_array = explode(',', $badwords);
-    
+
     $filtered_text = $this->filter_content($badwords_array, $html_out, $text);
+
+    // Include component replacements if enabled
+    $include_component_replacements = $this->params->get('include_component_replacements', '1');
+    if ($include_component_replacements) {
+      $db = Factory::getDbo();
+      $db->setQuery("SELECT * FROM #__badwordfilter_replacements WHERE `state` = 1 ORDER BY `ordering` ASC");
+      $replacements = $db->loadObjectList();
+      foreach($replacements as $replacement) {
+        if (!empty($replacement->bad_word) && !empty($replacement->output)) {
+          $filtered_text = str_ireplace($replacement->bad_word, $replacement->output, $filtered_text);
+        }
+      }
+    }
+
     if ($filtered_text != $text) {
       $app->setBody($filtered_text);
     }

@@ -22,7 +22,7 @@ jobs:
       id: getxml
       uses: mavrosxristoforos/get-xml-info@master
       with:
-        xml-file: 'badwordfilter/badwordfilter.xml'
+        xml-file: 'pkg_badwordfilter.xml'
         xpath: '//version'
     - name: Create Release
       id: create_release
@@ -39,18 +39,18 @@ jobs:
         draft: false
         prerelease: false
     - name: Upload Release Asset
-      id: upload-release-asset 
+      id: upload-release-asset
       uses: actions/upload-release-asset@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./badwordfilter.zip
-        asset_name: badwordfilter.zip
+        asset_path: ./pkg_badwordfilter.zip
+        asset_name: pkg_badwordfilter.zip
         asset_content_type: application/zip
     #- name: Create Release
     #  uses: ncipollo/release-action@v1
     #  with:
-    #    artifacts: 'badwordfilter.zip'
+    #    artifacts: 'pkg_badwordfilter.zip'
     #    token: ${{ secrets.GITHUB_TOKEN }}
     #    tag: ${{ steps.getxml.outputs.info }}

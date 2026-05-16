@@ -7,7 +7,7 @@
     <license>GNU General Public License</license>
     <authorEmail>mavrosxristoforos@gmail.com</authorEmail>
     <authorUrl>https://mavxr.com/</authorUrl>
-<version>2.0.24</version>
+<version>3.0.40</version>
     <description>A simple word filter plugin. Produces a user-defined HTML if it finds a bad word. Please enable inline help for more information.</description>
     <files>
         <filename plugin="badwordfilter">badwordfilter.php</filename>
@@ -20,6 +20,10 @@
             <fieldset name="basic">
                 <field name="bad_words" type="textarea" cols="30" rows="4" default="porn,sex" label="Bad Words" description="Words to filter out, separated by commas. Example: porn,sex" />
                 <field name="html_out" type="textarea" cols="30" rows="10" filter="raw" default="&lt;s&gt;BAD WORD&lt;/s&gt;" label="HTML Replacement" description="The HTML produced when a word is found. CAUTION: This is 'raw' output (i.e. what you put here is what is outputted onto the page, exactly!)" />
+                <field name="include_component_replacements" type="radio" default="1" label="Include Component Replacements" description="If this is yes, BWF will include the &lt;a href=&quot;index.php?option=com_badwordfilter&quot;&gt;replacements&lt;/a&gt; defined in the component." class="btn-group btn-group-yesno">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
                 <field name="allow_exceptions" type="radio" default="1" label="Allow Exceptions" description="If this is yes, BWF will not replace words in pages that contain the keyword {no_badwordfilter}." class="btn-group btn-group-yesno">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
